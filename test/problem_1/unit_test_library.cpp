@@ -10,6 +10,9 @@
 std::vector<Book> get_books();
 
 TEST(problem_1, library) {
+    int wait_time = 0;
+
+    // Create a library with floors and books
     std::vector<Floor> floors = {
             Floor('A', 'E', 120),
             Floor('F', 'J', 240),
@@ -17,32 +20,51 @@ TEST(problem_1, library) {
             Floor('P', 'T', 480),
             Floor('U', 'Z', 600),
     };
-
     std::vector<Book> books = get_books();
-
+    ArrayMap<std::string, Book &> book_by_title;
+    for (auto &book: books) {
+        book_by_title.put(book.get_name(), book);
+    }
     Library library(floors, books, 5);
 
-    int time = 0;
-    Book book;
-    bool found = library.borrow_book("Frankenstein", book, time);
-    std::cout << found << ", " << time << std::endl;
+    // Borrow a book
+    Book borrowed_book;
+    bool found = library.borrow_book("Frankenstein", borrowed_book, wait_time);
+    ASSERT_TRUE(found);
+    Book expect;
+    book_by_title.get("Frankenstein", expect);
+    ASSERT_EQ(expect, borrowed_book);
+    ASSERT_EQ(240, wait_time);
 
-    found = library.borrow_book("Frankenstein", book, time);
-    std::cout << found << ", " << time << std::endl;
+    // Borrow the same book again, and it shouldn't exist
+    found = library.borrow_book("Frankenstein", borrowed_book, wait_time);
+    ASSERT_FALSE(found);
 
-    library.return_book(book);
+    // Return the book
+    library.return_book(borrowed_book);
 
-    found = library.borrow_book("Frankenstein", book, time);
-    std::cout << found << ", " << time << std::endl;
+    // Borrow the same book again, and it should exist, because it's been returned
+    // And this time the wait time is only 5 seconds because it's retrieved from the front desk shelf
+    found = library.borrow_book("Frankenstein", borrowed_book, wait_time);
+    ASSERT_TRUE(found);
+    ASSERT_EQ(expect, borrowed_book);
+    ASSERT_EQ(5, wait_time);
 
+    /*
+     * Borrow and return another 5 other books, just to get "Frankenstein" evicted from the front desk shelf
+     */
     for (int i = 0; i < 5; ++i) {
-        Book borrowed_book;
-        library.borrow_book(books[i].get_name(), borrowed_book, time);
+        library.borrow_book(books[i].get_name(), borrowed_book, wait_time);
         library.return_book(borrowed_book);
     }
 
-    found = library.borrow_book("Frankenstein", book, time);
-    std::cout << found << ", " << time << std::endl;
+    /*
+     * Borrow "Frankenstein", and now it has to be retrieved from its floor
+     */
+    found = library.borrow_book("Frankenstein", borrowed_book, wait_time);
+    ASSERT_TRUE(found);
+    ASSERT_EQ(expect, borrowed_book);
+    ASSERT_EQ(240, wait_time);
 }
 
 std::vector<Book> get_books() {

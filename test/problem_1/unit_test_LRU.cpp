@@ -86,3 +86,16 @@ TEST(problem_1, eviction_least_recently_used) {
         }
     }
 }
+
+TEST(problem_1, LRU_non_existant_item) {
+    LRUCache<int> lru(5);
+    int actual;
+    bool found = lru.get("xyz", actual);
+    ASSERT_FALSE(found);
+
+    int evicted_value;
+    lru.put("abc", 30, evicted_value);
+    found = lru.get("xyz", actual);
+    ASSERT_FALSE(found);
+}
+

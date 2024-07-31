@@ -23,5 +23,15 @@ public:
     const std::string &get_name() const {
         return name;
     }
+
+    bool operator==(const Book &rhs) const {
+        return name == rhs.name &&
+               isbn == rhs.isbn &&
+               published_year == rhs.published_year;
+    }
+
+    bool operator!=(const Book &rhs) const {
+        return !(rhs == *this);
+    }
 };
 
