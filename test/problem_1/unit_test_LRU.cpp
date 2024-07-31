@@ -72,7 +72,7 @@ TEST(problem_1, eviction_least_recently_used) {
         // 3. The evicted item does not exist in the lru
         ASSERT_TRUE(evicted_item);
         ASSERT_EQ(test_cases[i].second, evicted_value);
-        auto found = lru.get(items_in_lru.end()->first, evicted_value);
+        auto found = lru.get(items_in_lru.back().first, evicted_value);
         ASSERT_FALSE(found);
 
         // Verify lru has all what it should have
