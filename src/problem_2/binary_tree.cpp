@@ -8,9 +8,30 @@
 template<class T>
 std::vector<T> *BinaryTree<T>::dfs_in_order() {
     auto *result = new std::vector<T>();
-    /*
-     * TODO: homework
-     */
+    std::stack<TreeNode<T> *> stack;
+
+    if (root == nullptr) {
+        return result;
+    }
+
+    stack.push(root);
+    while (!stack.empty()) {
+        auto node = stack.top();
+        while (node->left != nullptr) {
+            stack.push(node->left);
+            node = node->left;
+        }
+
+        while (!stack.empty()) {
+            node = stack.top();
+            stack.pop();
+            result->push_back(node->val);
+            if (node->right != nullptr) {
+                stack.push(node->right);
+                break;
+            }
+        }
+    }
     return result;
 }
 
@@ -21,14 +42,50 @@ std::vector<T> *BinaryTree<T>::dfs_in_order() {
 template<class T>
 std::vector<T> *BinaryTree<T>::dfs_pre_order() {
     auto *result = new std::vector<T>();
-    /*
-     * TODO: homework
-     */
+    std::stack<TreeNode<T> *> stack;
+
+    if (root == nullptr) {
+        return result;
+    }
+
+    stack.push(root);
+    while (!stack.empty()) {
+        auto node = stack.top();
+        stack.pop();
+        result->push_back(node->val);
+        if (node->right != nullptr) {
+            stack.push(node->right);
+        }
+        if (node->left != nullptr) {
+            stack.push(node->left);
+        }
+    }
+
     return result;
 }
 
 template<class T>
 TreeNode<T> *BinaryTree<T>::lca(TreeNode<T> *node_start, TreeNode<T> *node_1, TreeNode<T> *node_2) {
+    if (node_start == nullptr) {
+        return nullptr;
+    }
+
+    if (node_start->val == node_1->val || node_start->val == node_2->val) {
+        return node_start;
+    }
+
+    TreeNode<int> *left = lca(node_start->left, node_1, node_2);
+    TreeNode<int> *right = lca(node_start->right, node_1, node_2);
+
+    if (left == nullptr && right == nullptr) {
+        return nullptr;
+    }
+
+    if (left != nullptr && right != nullptr) {
+        return node_start;
+    }
+
+    return left != nullptr ? left : right;
     /*
      * TODO: homework
      * This helper function is OPTIONAL.
@@ -39,9 +96,7 @@ TreeNode<T> *BinaryTree<T>::lca(TreeNode<T> *node_start, TreeNode<T> *node_1, Tr
 
 template<class T>
 TreeNode<T> *BinaryTree<T>::lca(TreeNode<T> *node_1, TreeNode<T> *node_2) {
-    /*
-     * TODO: homework
-     */
+    return lca(root, node_1, node_2);
 }
 
 template<class T>
