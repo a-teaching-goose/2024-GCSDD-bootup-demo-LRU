@@ -1,3 +1,7 @@
+/*
+ * DO NOT MAKE ANY CHANGES unless specified OK
+ */
+
 #include "gtest/gtest.h"
 #include "unit_test_sudoku.h"
 

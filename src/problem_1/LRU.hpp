@@ -70,18 +70,20 @@ bool LRUCache<T>::remove(const std::string &key) {
     }
 
     // remove the node_to_delete from the linked list
+    bool item_removed = false;
     auto ptr = &head;
     while (ptr->next != nullptr) {
         if (ptr->next->key == key) {
             auto node_to_delete = ptr->next;
             ptr->next = node_to_delete->next;
             delete node_to_delete;
+            item_removed = true;
             map->remove(key);
             num_of_entry--;
         }
         ptr = ptr->next;
     }
-    return true;
+    return item_removed;
 }
 
 template<typename T>
