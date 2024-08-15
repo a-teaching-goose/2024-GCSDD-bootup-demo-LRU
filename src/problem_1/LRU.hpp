@@ -80,6 +80,7 @@ bool LRUCache<T>::remove(const std::string &key) {
             item_removed = true;
             map->remove(key);
             num_of_entry--;
+            break;
         }
         ptr = ptr->next;
     }

@@ -4,9 +4,9 @@ bool Library::borrow_book(const std::string &book_name, Book &borrowed_book, int
     bool found = front_desk_shelf.get(book_name, borrowed_book);
     if (found) {
         time_of_operation_in_sec = front_desk_shelf.get_capacity();  // each book in the front desk shelf takes 1 sec to search
+        front_desk_shelf.remove(book_name); // added this for the fake test fix
         return true;
     }
-
     return find_book_in_floors(book_name, borrowed_book, time_of_operation_in_sec);
 }
 

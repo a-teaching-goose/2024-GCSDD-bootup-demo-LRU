@@ -50,6 +50,8 @@ TEST(problem_1, library) {
     ASSERT_EQ(expect, borrowed_book);
     ASSERT_EQ(5, wait_time);
 
+    library.return_book(borrowed_book);
+
     /*
      * Borrow and return another 5 other books, just to get "Frankenstein" evicted from the front desk shelf
      */
