@@ -4,19 +4,19 @@
 
 #include "unit_test_map.h"
 
-TEST(problem_1, array_map_init_is_empty) {
+TEST(LRU_Library, array_map_init_is_empty) {
     ArrayMap<int, int> hash_map;
     ASSERT_TRUE(hash_map.is_empty());
 }
 
-TEST(problem_1, array_map_put_new_key) {
+TEST(LRU_Library, array_map_put_new_key) {
     array_map_put_new_key<int, int>();
     array_map_put_new_key<float, int>();
     array_map_put_new_key<int, float>();
     array_map_put_new_key<float, float>();
 }
 
-TEST(problem_1, array_map_remove) {
+TEST(LRU_Library, array_map_remove) {
     array_map_test_remove<int, int>();
     array_map_test_remove<float, int>();
     array_map_test_remove<int, float>();
@@ -26,7 +26,7 @@ TEST(problem_1, array_map_remove) {
 /*
  * used for problem 2 testing
  */
-TEST(problem_1, array_map_list_contructor) {
+TEST(LRU_Library, array_map_list_contructor) {
     ArrayMap<float, float> map = ArrayMap<float, float>(
             {
                     {1, 1.1},
@@ -44,7 +44,7 @@ TEST(problem_1, array_map_list_contructor) {
     ASSERT_FLOAT_EQ(2, map.size());
 }
 
-TEST(problem_1, array_map_list_contructor_2) {
+TEST(LRU_Library, array_map_list_contructor_2) {
     ArrayMap<float, float> map(
             {
                     {1, 1.3},
@@ -66,14 +66,14 @@ TEST(problem_1, array_map_list_contructor_2) {
     ASSERT_FLOAT_EQ(3, map.size());
 }
 
-TEST(problem_1, array_map_equal) {
+TEST(LRU_Library, array_map_equal) {
     array_map_test_equal<int, int>();
     array_map_test_equal<float, int>();
     array_map_test_equal<int, float>();
     array_map_test_equal<float, float>();
 }
 
-TEST(problem_1, array_map_copy_constructor) {
+TEST(LRU_Library, array_map_copy_constructor) {
     ArrayMap<float, float> *map_1 = new ArrayMap<float, float>(
             {
                     {2, 2.3},
@@ -100,7 +100,7 @@ TEST(problem_1, array_map_copy_constructor) {
     ASSERT_TRUE(map_copy == map_2);
 }
 
-TEST(problem_1, array_map_copy_constructor_duplicate_hash_key) {
+TEST(LRU_Library, array_map_copy_constructor_duplicate_hash_key) {
     const int CAPACITY = 5;
     ArrayMap<float, float> *map_1 = new ArrayMap<float, float>(CAPACITY);
     map_1->put(1, 1.3);
@@ -128,7 +128,7 @@ TEST(problem_1, array_map_copy_constructor_duplicate_hash_key) {
     ASSERT_TRUE(map_copy == map_2);
 }
 
-TEST(problem_1, array_map_keyset) {
+TEST(LRU_Library, array_map_keyset) {
     ArrayMap<int, float> map(3);
     map.put(1, 1.1);
     map.put(3, 3.3);

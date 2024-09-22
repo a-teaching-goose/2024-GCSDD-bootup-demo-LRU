@@ -3,9 +3,9 @@
  */
 
 #include "gtest/gtest.h"
-#include "problem_1/LRU.hpp"
+#include "LRU_Library/LRU.hpp"
 
-TEST(problem_1, LRU_put_get) {
+TEST(LRU_Library, LRU_put_get) {
     int evicted_value;
     LRUCache<int> lru(5);
     std::vector<std::pair<std::string, int>> test_cases = {
@@ -28,7 +28,7 @@ TEST(problem_1, LRU_put_get) {
     }
 }
 
-TEST(problem_1, eviction_least_recently_used) {
+TEST(LRU_Library, eviction_least_recently_used) {
     int evicted_value;
     LRUCache<int> lru(4);
     std::vector<std::pair<std::string, int>> test_cases = {
@@ -87,7 +87,7 @@ TEST(problem_1, eviction_least_recently_used) {
     }
 }
 
-TEST(problem_1, LRU_non_existant_item) {
+TEST(LRU_Library, LRU_non_existant_item) {
     LRUCache<int> lru(5);
     int actual;
     bool found = lru.get("xyz", actual);

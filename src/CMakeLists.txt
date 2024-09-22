@@ -2,7 +2,7 @@ add_executable(${PROJECT_NAME} main.cpp)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
-FILE(GLOB ProblemSource problem_1/*.cpp problem_3/*/*.cpp problem_3/*.cpp problem_4/*.cpp) # problem 2 template files don't need to be compiled here
+FILE(GLOB ProblemSource LRU_Library/*.cpp)
 add_library(homework_functions STATIC ${ProblemSource})
 
 target_link_libraries(${PROJECT_NAME} homework_functions)

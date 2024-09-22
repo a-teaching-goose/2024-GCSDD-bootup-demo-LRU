@@ -3,13 +3,13 @@
  */
 
 #include "gtest/gtest.h"
-#include "problem_1/book.h"
-#include "problem_1/floor.h"
-#include "problem_1/library.h"
+#include "LRU_Library/book.h"
+#include "LRU_Library/floor.h"
+#include "LRU_Library/library.h"
 
 std::vector<Book> get_books();
 
-TEST(problem_1, library) {
+TEST(LRU_Library, library) {
     int wait_time = 0;
 
     // Create a library with floors and books

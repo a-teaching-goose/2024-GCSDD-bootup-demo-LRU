@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "problem_1/array_map.h"
+#include "LRU_Library/array_map.h"
 #include "unit_test_map.h"
 #include "gtest/gtest.h"
 

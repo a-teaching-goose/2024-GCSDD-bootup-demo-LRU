@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "problem_1/array_list.h"
+#include "LRU_Library/array_list.h"
 
 template<typename T>
 void fill_list_with_vector(List<T> &list, const std::vector<T> &data) {
